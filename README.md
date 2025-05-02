@@ -6,23 +6,23 @@
 
 - Paso 2.- El primer paso para desarrollar este desafío es importar las bases de datos en Power BI. Trabajarás con dos archivos principales: el archivo Productos, que está en formato .csv, y el archivo Datos Stock, que está en formato .xlsx.
 
-Paso.-3 Para todo proyecto de datos, una de las partes más importantes es la que consiste en  la limpieza de los datos. Utiliza el editor de Power Query para limpiar y transformar las informaciones en las bases de datos.
+- Paso.-3 Para todo proyecto de datos, una de las partes más importantes es la que consiste en  la limpieza de los datos. Utiliza el editor de Power Query para limpiar y transformar las informaciones en las bases de datos.
 
-Paso 4.- Crea las relaciones entre las tablas en Power BI para garantizar que los datos estén correctamente conectados y puedan ser analizados de forma integrada.
+- Paso 4.- Crea las relaciones entre las tablas en Power BI para garantizar que los datos estén correctamente conectados y puedan ser analizados de forma integrada.
   Solución: Se generan la relaciones entre las columnas ID producto de las tablas de Productos y Datos Stock
 
-Paso 5.-Necesitamos agregar a la tabla de Datos Stock la información de las columnas Precio de Costo y Precio de Venta que están disponibles en la tabla de Productos.
+- Paso 5.-Necesitamos agregar a la tabla de Datos Stock la información de las columnas Precio de Costo y Precio de Venta que están disponibles en la tabla de Productos.
 
    Solución: Se agregan columnas con las siguientes operaciones:
        Precio_Costo = RELATED(Productos[Precio de Costo])
        Precio_Venta = RELATED(Productos[Precio de Venta] )
 
-Paso 6.- Calcula el valor de cada producto en stock con base en la información disponible. Crea una nueva columna en la tabla de Datos Stock. Utiliza una función DAX para multiplicar el "Precio de Costo" por la "Cantidad".
+- Paso 6.- Calcula el valor de cada producto en stock con base en la información disponible. Crea una nueva columna en la tabla de Datos Stock. Utiliza una función DAX para multiplicar el "Precio de Costo" por la "Cantidad".
 
     Solución: Se crea una columna con la siguiente función DAX:
       Costo_Total = 'Datos stock'[Cantidad] * 'Datos stock'[Precio_Costo]
 
-Paso 7.- Calcula el valor de venta de cada producto con base en la información disponible.Crea una nueva columna en la tabla de Datos stock.
+- Paso 7.- Calcula el valor de venta de cada producto con base en la información disponible.Crea una nueva columna en la tabla de Datos stock.
 Utiliza una función DAX para multiplicar el "Precio de Venta" por la "Cantidad".
 
     Solución 1: Se crea una columna con la función IF, considerando que calcule sólo las salidas como precio de venta, ya que en términos financieros no podemos considerar las entradas con el precio de venta, ya que sería un error, en otras palabras, las entradas se deben de considerar con el precio de costo, ya que determinarán el valor de los inventarios. En este sentido se la función DAX IF tendrá el objetivo  de que sólo calcule el valor de cada producto cuando el tipo de movimiento sea una salida. 
@@ -50,7 +50,7 @@ Total_Movimiento_EyS =
       Ventas_Totales2 = 
     SUMX('Productos','Productos'[Precio de Venta]*'Medidas'[Salidas])
 
-Paso 8) Calcula la cantidad total en stock con base en la información disponible. Utiliza el lenguaje DAX para crear una medida que haga la diferencia entre la cantidad total de entradas y salidas. Elige una visualización para observar esta métrica en el Dashboard.
+- Paso 8) Calcula la cantidad total en stock con base en la información disponible. Utiliza el lenguaje DAX para crear una medida que haga la diferencia entre la cantidad total de entradas y salidas. Elige una visualización para observar esta métrica en el Dashboard.
 
 Crea una nueva medida en Power BI para calcular la cantidad total en stock. Utiliza variables DAX para almacenar la cantidad total de entradas y salidas. Calcula la diferencia entre el total de entradas y el total de salidas. Un visual de tarjeta puede ser una buena opción para mostrar un valor.
 
@@ -93,7 +93,7 @@ Entradas =
     CALCULATE(
         'Medidas'[Entradas] -'Medidas'[Salidas])
 
-Paso 9 Calcula la facturación total basada en las salidas registradas. Utiliza el lenguaje DAX para crear una medida que sume el valor total de las salidas. Elige una visualización para observar esta métrica en el Dashboard. 
+- Paso 9 Calcula la facturación total basada en las salidas registradas. Utiliza el lenguaje DAX para crear una medida que sume el valor total de las salidas. Elige una visualización para observar esta métrica en el Dashboard. 
 
 Consejos: Crea una nueva medida en Power BI para calcular la facturación total de las salidas. Aplica los filtros adecuados para sumar solo las salidas. Utiliza la columna calculada "Facturación" que ya has definido en tu fórmula. Un visual de tarjeta puede ser una buena opción para mostrar un valor
 
@@ -107,7 +107,7 @@ Consejos: Crea una nueva medida en Power BI para calcular la facturación total 
     SUMX('Productos','Productos'[Precio de Venta]*'Medidas'[Salidas])
 
 
-Paso 10.- Calcula a través de los datos el valor total en stock y elige una visualización para observar esta métrica en el Dashboard.
+- Paso 10.- Calcula a través de los datos el valor total en stock y elige una visualización para observar esta métrica en el Dashboard.
 
 Consejos: Crea una nueva medida en Power BI para calcular el valor total en stock. Aplica los filtros adecuados en la medida para sumar el valor total basado en las entradas y salidas. Utiliza la columna calculada que ya has creado, la cual multiplica el precio de venta por la cantidad disponible. Un visual de tarjeta puede ser una buena opción para mostrar un valor.
 
@@ -116,24 +116,24 @@ Solucíón  :
 Valor_Stock = 
     SUMX('Productos','Productos'[Precio de Costo]*'Medidas'[Stock_Disponible])
 
-Paso 11.- Elige una visualización que permita visualizar los datos de facturación y cantidad de salidas a lo largo del tiempo.
+- Paso 11.- Elige una visualización que permita visualizar los datos de facturación y cantidad de salidas a lo largo del tiempo.
 
 Consejos: Utiliza las medidas de facturación y salidas que has creado para segmentar y visualizar los datos de manera efectiva.
 El gráfico de columnas apiladas y de líneas puede ser una buena opción.
 
-Paso 12.- Elige una visualización que permita observar en el Dashboard de forma detallada y clara los datos de nombre del producto, categoría, cantidad en stock y valor del stock.
+- Paso 12.- Elige una visualización que permita observar en el Dashboard de forma detallada y clara los datos de nombre del producto, categoría, cantidad en stock y valor del stock.
 
 Consejo: Utiliza las medidas que has creado para segmentar y visualizar los datos de manera efectiva. Utiliza una visualización de tabla para mostrar estos datos de forma detallada y organizada.
 
-Paso 13.- Elige una visualización que permita visualizar en el Dashboard los datos de Cantidad de Stock por categoría
+- Paso 13.- Elige una visualización que permita visualizar en el Dashboard los datos de Cantidad de Stock por categoría
 
 Consejo:Utiliza la medida de cantidad de stock que has creado y la columna de categoría de la tabla de productos para segmentar y visualizar los datos de manera efectiva. El gráfico Treemap puede ser una buena opción.
 
-Paso 14.- Elige una visualización que permita visualizar en el Dashboard los datos de Facturación por categoría.
+- Paso 14.- Elige una visualización que permita visualizar en el Dashboard los datos de Facturación por categoría.
 
 Consejo: Utiliza la medida de facturación que has creado para segmentar y visualizar los datos de manera efectiva. El gráfico de barras apiladas puede ser una buena opción.
 
-Paso 15.- Propone decisiones y otras métricas que puedan ayudar a Gatito. 
+- Paso 15.- Propone decisiones y otras métricas que puedan ayudar a Gatito. 
 
 Solución.- Es importante destacar cuáles son los productos que mayor demanda tienen con la finalidad de tener presente su cantidad económica de pedido.
 
@@ -162,7 +162,7 @@ divide(
         
 - Estado del proyecto
 
-- Término de la etapa 1 del Chalenge Gatito
+    Término de la etapa 1 del Chalenge Gatito
 
 
   
